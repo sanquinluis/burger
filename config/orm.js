@@ -1,9 +1,29 @@
 //require to connection.js
+//Here is the O.R.M where you write functions that takes inputs and conditions and turn them into database commands like SQL.
 var connection = require('../config/connection.js');
+
+function printQuestionMark(num){
+	var arr = [];
+	for (var i = 0; i < num; i++){
+		arr.push('?');
+	}
+	return arr.toString();
+}
+
+function objToSql(ob) {
+	var arr = [];
+
+	for(var key in ob){
+		if (ob.hasOwnProperty(key)) {
+			arr.push(key + '=' + ob[key]);
+		}
+	}
+	return arr.toString();
+}
 
 var orm = {
 	//selectAll
-	selectAll: function(cb){
+	selectAll: function(tableInput,cb){
 		var queryString = "SELECT * FROM " + tableInput + ";";
 		connection.query(queryString, function(err, result){
 			if(err) throw err;
@@ -11,8 +31,17 @@ var orm = {
 		});
 	};
 	//insertOne
-	insertOne: function(cb){
-		var queryString = "INSERT INTO " + tableInput + ""????
+	insertOne: function(table,cols,vals,cb){
+		var queryString = 'INSERT INTO' + table;
+
+		queryString = queryString + '(';
+		queryString = queryString + cols.toString();
+		queryString = queryString + 'VALUES (';
+		queryString = queryString + printQuestionMark(vals.lenght);
+		queryString = queryString + ') ';
+
+		console.log(queryString);
+
 		connection.query(queryString, function(err, result){
 			if(err) throw err;
 			cb(result);
@@ -20,8 +49,16 @@ var orm = {
 		});
 	};
 	//updateOne
-	updateOne: function(cb){
-		var queryString = "UPDATE" ??????
+	updateOne: function(table, objCalVals, conditon, cb) {
+		var queryString = 'UPDATE ' + table;
+
+		queryString = queryString + ' SET ';
+		queryString = queryString + objToSql(objCalVals);
+		queryString = queryString + ' WHERE ';
+		queryString = queryString + conditon;
+
+		console.log(queryString);
+		
 		connection.query(queryString, function(err,result){
 			if(err) throw err;
 			cb(result);
