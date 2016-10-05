@@ -22,16 +22,16 @@ function objToSql(ob) {
 }
 
 var orm = {
-	//selectAll
-	selectAll: function(tableInput,cb){
-		var queryString = "SELECT * FROM " + tableInput + ";";
-		connection.query(queryString, function(err, result){
-			if(err) throw err;
+	//selectall
+	all: function (tableInput, cb) {
+		var queryString = 'SELECT * FROM ' + tableInput + ';';
+		connection.query(queryString, function (err, result) {
+			if (err) throw err;
 			cb(result);
 		});
-	};
+	},
 	//insertOne
-	insertOne: function(table,cols,vals,cb){
+	create: function(table,cols,vals,cb){
 		var queryString = 'INSERT INTO' + table;
 
 		queryString = queryString + '(';
@@ -47,9 +47,9 @@ var orm = {
 			cb(result);
 
 		});
-	};
+	},
 	//updateOne
-	updateOne: function(table, objCalVals, conditon, cb) {
+	update: function(table, objCalVals, conditon, cb) {
 		var queryString = 'UPDATE ' + table;
 
 		queryString = queryString + ' SET ';
@@ -63,10 +63,13 @@ var orm = {
 			if(err) throw err;
 			cb(result);
 		});
-	};
+	},
 
 
 
 };
 
 module.exports = orm;
+
+
+

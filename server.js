@@ -1,16 +1,41 @@
 //requiring express mysql and method-override.
-var methodOverride = require('method-override')
+//Here is where you set up your server file. Express middleware.
+//Dependencies
+var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
+
 var express = require("express");
+//Configurations 
 var app = express();
-// Adding in the components of the mysql library. Outlining the parameters tied to the mysql db
-var mysql = require('mysql');
-//========================================================================//
-var connection = mysql.createConnection({
-	PORT: 3306,
-	host: 'localhost',
-	user: 'root',
-	password: 'root',
-	database: 'burgers_db'
+app.set('port', (process.env.PORT || 3001));
+
+//server static content for the app from the "public" directory in the application directory.
+
+app.use(express.static(process.cwd() + '/public'));
+
+app.use(bodyParser.urlencoded({
+		extended: false
+}));
+//override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+//Handelbar engine
+var exphbs = require('express-handlebars');
+app.engine('handelbar', exphbs({
+	defaultLayout: 'main'
+}));
+
+app.set('view engine', 'handelbar');
+
+var routes = require('./controllers/burgers_controller.js');
+app.use('/', routes);
+
+
+//PORT Listener
+app.listen(app.get('port'),function() {
+	console.log("App is listening on PORT: " + app.get('port'));
 });
+
+
+
 
 
