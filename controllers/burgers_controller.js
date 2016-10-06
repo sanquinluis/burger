@@ -5,12 +5,12 @@ var router = express.Router();
 var burger = require('../models/burger.js');
 
 router.get('/', function(req,res){
-	res.redirect('/burgers')
+	res.redirect('/burgers');
 });
 
 router.get('/burgers', function (req, res){
-	burger.all(function(data){
-		var hbsObject = {burgers: data}
+	burger.all(function(data) {
+		var hbsObject = {burgers: data};
 		console.log(hbsObject);
 		res.render('index', hbsObject);
 	});
@@ -18,7 +18,7 @@ router.get('/burgers', function (req, res){
 
 router.post('/burgers/create', function(req, res){
 	burger.create(['burger_name', 'devoured'], [req.body.name, req,body.devoured], function(data){
-		res.redirect('/burgers')
+		res.redirect('/burgers');
 	});
 });
 

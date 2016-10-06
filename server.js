@@ -11,7 +11,7 @@ app.set('port', (process.env.PORT || 3001));
 
 //server static content for the app from the "public" directory in the application directory.
 
-// app.use(express.static(process.cwd() + '/public'));
+app.use(express.static(process.cwd() + '/public'));
 
 app.use(bodyParser.urlencoded({
 		extended: false
@@ -22,11 +22,11 @@ app.use(methodOverride('_method'));
 
 //Handelbar engine
 var exphbs = require('express-handlebars');
-app.engine('handlebar', exphbs({
+app.engine('handlebars', exphbs({
 	defaultLayout: 'main'
 }));
 
-app.set('view engine', 'handlebar');
+app.set('view engine', 'handlebars');
 
 var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
