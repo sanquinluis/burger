@@ -27,10 +27,17 @@ li {
 }
 #devouredB {
 	background-color: floralwhite;
-	float: right;
-	margin-right: 120px;
-	margin-bottom: -20px;
-
+	margin-left: 400px;
+	width: 300px;
+	height: 208px;
+	text-align: center;
 
 
 }
+#inputB {
+	margin-left: 375px;	
+}
+
+
+
+

@@ -16,15 +16,14 @@
 
 								<form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
 									<input type="hidden" name="devoured" value="true">
-									<button class="btn btn-primary" type="submit">Devour IT NOW!</button>
+									<button class="btn btn-primary" type="submit">Devour IT!</button>
 								</form>
 						</li>
 					{{/unless}}
 				{{/each}}
 			</ul>
 		</div>
-	</div>
-	<div class="row">
+	
 		<div class="col-sm-4" id="devouredB">
 			<ul>
 				{{#each burgers}}
@@ -42,9 +41,9 @@
 			</ul>
 
 		</div>
-	</div>
+	</div> <!--row1-->
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-4" id="inputB">
 			<h2>Add a Burger</h2>
 				<form class="create-update-form" action="burgers/create" method="POST">
 					<div class="from-group">
